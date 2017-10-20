@@ -1,8 +1,8 @@
 {
   "_from": "pdfjs-dist@^1.9.607",
-  "_id": "pdfjs-dist@1.9.607",
+  "_id": "pdfjs-dist@1.9.648",
   "_inBundle": false,
-  "_integrity": "sha1-tcD18aOIGvBNwS4VNzCGiuITQ1I=",
+  "_integrity": "sha1-XPGrDs0kxJHHuQQVAEOIkY9esyo=",
   "_location": "/pdfjs-dist",
   "_phantomChildren": {},
   "_requested": {
@@ -18,10 +18,10 @@
   "_requiredBy": [
     "/"
   ],
-  "_resolved": "https://registry.npmjs.org/pdfjs-dist/-/pdfjs-dist-1.9.607.tgz",
-  "_shasum": "b5c0f5f1a3881af04dc12e153730868ae2134352",
+  "_resolved": "http://registry.npm.taobao.org/pdfjs-dist/download/pdfjs-dist-1.9.648.tgz",
+  "_shasum": "5cf1ab0ecd24c491c7b90415004388918f5eb32a",
   "_spec": "pdfjs-dist@^1.9.607",
-  "_where": "/Users/vadimdez/Documents/my_dev/ng2-pdf-viewer",
+  "_where": "/Users/bond/AngularProjects/ng2-pdf-viewer",
   "browser": {
     "fs": false,
     "http": false,
@@ -34,7 +34,7 @@
   "bundleDependencies": false,
   "dependencies": {
     "node-ensure": "^0.0.0",
-    "worker-loader": "^0.8.0"
+    "worker-loader": "^1.0.0"
   },
   "deprecated": false,
   "description": "Generic build of Mozilla's PDF.js library.",
@@ -52,5 +52,5 @@
     "type": "git",
     "url": "git+https://github.com/mozilla/pdfjs-dist.git"
   },
-  "version": "1.9.607"
+  "version": "1.9.648"
 }

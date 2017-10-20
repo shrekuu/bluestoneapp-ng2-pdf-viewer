@@ -21,6 +21,7 @@ export declare class PdfViewerComponent implements OnChanges, OnInit {
     afterLoadComplete: EventEmitter<PDFDocumentProxy>;
     onError: EventEmitter<any>;
     onProgress: EventEmitter<PDFProgressData>;
+    pdfJsWorkerSrc: string;
     constructor(element: ElementRef);
     ngOnInit(): void;
     onPageResize(): void;

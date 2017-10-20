@@ -2149,6 +2149,7 @@ var AnnotationLayerBuilder = function () {
     this.renderInteractiveForms = renderInteractiveForms;
     this.l10n = l10n;
     this.div = null;
+    this._cancelled = false;
   }
 
   _createClass(AnnotationLayerBuilder, [{
@@ -2159,6 +2160,9 @@ var AnnotationLayerBuilder = function () {
       var intent = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'display';
 
       this.pdfPage.getAnnotations({ intent: intent }).then(function (annotations) {
+        if (_this._cancelled) {
+          return;
+        }
         var parameters = {
           viewport: viewport.clone({ dontFlip: true }),
           div: _this.div,
@@ -2182,6 +2186,11 @@ var AnnotationLayerBuilder = function () {
           _this.l10n.translate(_this.div);
         }
       });
+    }
+  }, {
+    key: 'cancel',
+    value: function cancel() {
+      this._cancelled = true;
     }
   }, {
     key: 'hide',
@@ -2330,7 +2339,7 @@ var PDFPageView = function () {
       var keepZoomLayer = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
       var keepAnnotations = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 
-      this.cancelRendering();
+      this.cancelRendering(keepAnnotations);
       var div = this.div;
       div.style.width = Math.floor(this.viewport.width) + 'px';
       div.style.height = Math.floor(this.viewport.height) + 'px';
@@ -2347,7 +2356,8 @@ var PDFPageView = function () {
       div.removeAttribute('data-loaded');
       if (currentAnnotationNode) {
         this.annotationLayer.hide();
-      } else {
+      } else if (this.annotationLayer) {
+        this.annotationLayer.cancel();
         this.annotationLayer = null;
       }
       if (!currentZoomLayerNode) {
@@ -2418,6 +2428,8 @@ var PDFPageView = function () {
   }, {
     key: 'cancelRendering',
     value: function cancelRendering() {
+      var keepAnnotations = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+
       if (this.paintTask) {
         this.paintTask.cancel();
         this.paintTask = null;
@@ -2427,6 +2439,10 @@ var PDFPageView = function () {
       if (this.textLayer) {
         this.textLayer.cancel();
         this.textLayer = null;
+      }
+      if (!keepAnnotations && this.annotationLayer) {
+        this.annotationLayer.cancel();
+        this.annotationLayer = null;
       }
     }
   }, {
@@ -3410,7 +3426,7 @@ exports.PDFSinglePageViewer = PDFSinglePageViewer;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.isDestsEqual = exports.PDFHistory = undefined;
+exports.isDestArraysEqual = exports.isDestHashesEqual = exports.PDFHistory = undefined;
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
@@ -3489,7 +3505,7 @@ var PDFHistory = function () {
       this._blockHashChange = 0;
       this._currentHash = getCurrentHash();
       this._numPositionUpdates = 0;
-      this._currentUid = this._uid = 0;
+      this._uid = this._maxUid = 0;
       this._destination = null;
       this._position = null;
       if (!this._isValidState(state) || resetHistory) {
@@ -3544,7 +3560,7 @@ var PDFHistory = function () {
         return;
       }
       var forceReplace = false;
-      if (this._destination && (this._destination.hash === hash || isDestsEqual(this._destination.dest, explicitDest))) {
+      if (this._destination && (isDestHashesEqual(this._destination.hash, hash) || isDestArraysEqual(this._destination.dest, explicitDest))) {
         if (this._destination.page) {
           return;
         }
@@ -3592,7 +3608,7 @@ var PDFHistory = function () {
         return;
       }
       var state = window.history.state;
-      if (this._isValidState(state) && state.uid < this._uid - 1) {
+      if (this._isValidState(state) && state.uid < this._maxUid) {
         window.history.forward();
       }
     }
@@ -3604,13 +3620,14 @@ var PDFHistory = function () {
       var shouldReplace = forceReplace || !this._destination;
       var newState = {
         fingerprint: this.fingerprint,
-        uid: shouldReplace ? this._currentUid : this._uid,
+        uid: shouldReplace ? this._uid : this._uid + 1,
         destination: destination
       };
       this._updateInternalState(destination, newState.uid);
       if (shouldReplace) {
         window.history.replaceState(newState, '', document.URL);
       } else {
+        this._maxUid = this._uid;
         window.history.pushState(newState, '', document.URL);
       }
     }
@@ -3680,8 +3697,7 @@ var PDFHistory = function () {
         delete destination.temporary;
       }
       this._destination = destination;
-      this._currentUid = uid;
-      this._uid = this._currentUid + 1;
+      this._uid = uid;
       this._numPositionUpdates = 0;
     }
   }, {
@@ -3727,7 +3743,7 @@ var PDFHistory = function () {
           hashChanged = this._currentHash !== newHash;
       this._currentHash = newHash;
       if (!state || false) {
-        this._currentUid = this._uid;
+        this._uid++;
 
         var _parseCurrentHash2 = parseCurrentHash(this.linkService),
             hash = _parseCurrentHash2.hash,
@@ -3800,7 +3816,23 @@ var PDFHistory = function () {
   return PDFHistory;
 }();
 
-function isDestsEqual(firstDest, secondDest) {
+function isDestHashesEqual(destHash, pushHash) {
+  if (typeof destHash !== 'string' || typeof pushHash !== 'string') {
+    return false;
+  }
+  if (destHash === pushHash) {
+    return true;
+  }
+
+  var _parseQueryString = (0, _ui_utils.parseQueryString)(destHash),
+      nameddest = _parseQueryString.nameddest;
+
+  if (nameddest === pushHash) {
+    return true;
+  }
+  return false;
+}
+function isDestArraysEqual(firstDest, secondDest) {
   function isEntryEqual(first, second) {
     if ((typeof first === 'undefined' ? 'undefined' : _typeof(first)) !== (typeof second === 'undefined' ? 'undefined' : _typeof(second))) {
       return false;
@@ -3835,7 +3867,8 @@ function isDestsEqual(firstDest, secondDest) {
   return true;
 }
 exports.PDFHistory = PDFHistory;
-exports.isDestsEqual = isDestsEqual;
+exports.isDestHashesEqual = isDestHashesEqual;
+exports.isDestArraysEqual = isDestArraysEqual;
 
 /***/ }),
 /* 13 */

@@ -193,7 +193,7 @@ function _fetchDocument(worker, source, pdfDataRangeTransport, docId) {
   if (worker.destroyed) {
     return Promise.reject(new Error('Worker was destroyed'));
   }
-  var apiVersion = '1.9.607';
+  var apiVersion = '1.9.648';
   source.disableAutoFetch = (0, _dom_utils.getDefaultSetting)('disableAutoFetch');
   source.disableStream = (0, _dom_utils.getDefaultSetting)('disableStream');
   source.chunkedViewerLoading = !!pdfDataRangeTransport;
@@ -1148,7 +1148,7 @@ var WorkerTransport = function WorkerTransportClosure() {
               };
             }
             var font = new _font_loader.FontFaceObject(exportedData, {
-              isEvalSuported: (0, _dom_utils.getDefaultSetting)('isEvalSupported'),
+              isEvalSupported: (0, _dom_utils.getDefaultSetting)('isEvalSupported'),
               disableFontFace: (0, _dom_utils.getDefaultSetting)('disableFontFace'),
               fontRegistry: fontRegistry
             });
@@ -1584,8 +1584,8 @@ var _UnsupportedManager = function UnsupportedManagerClosure() {
 }();
 var version, build;
 {
-  exports.version = version = '1.9.607';
-  exports.build = build = 'b3f84112';
+  exports.version = version = '1.9.648';
+  exports.build = build = '56c14e27';
 }
 exports.getDocument = getDocument;
 exports.LoopbackPort = LoopbackPort;
