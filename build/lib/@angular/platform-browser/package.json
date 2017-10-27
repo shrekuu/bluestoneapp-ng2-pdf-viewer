@@ -22,7 +22,7 @@
   "_resolved": "http://registry.npm.taobao.org/@angular/platform-browser/download/@angular/platform-browser-4.4.6.tgz",
   "_shasum": "a9839c547e1b654fa1d24a89780c8ba6ab8dcce0",
   "_spec": "@angular/platform-browser@^4.1.0",
-  "_where": "/Users/bond/AngularProjects/ng2-pdf-viewer",
+  "_where": "/Users/bond/AngularProjects/bluestoneapp-ng2-pdf-viewer",
   "author": {
     "name": "angular"
   },

@@ -21,12 +21,7 @@ var PdfViewerComponent = (function () {
         this.onError = new core_1.EventEmitter();
         this.onProgress = new core_1.EventEmitter();
         this.pageChange = new core_1.EventEmitter(true);
-        if (this.pdfJsWorkerSrc) {
-            PDFJS.workerSrc = this.pdfJsWorkerSrc;
-        }
-        else {
-            PDFJS.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/" + PDFJS.version + "/pdf.worker.min.js";
-        }
+        PDFJS.workerSrc = "https://cdn.bootcss.com/pdf.js/1.9.640/pdf.worker.min.js";
     }
     PdfViewerComponent.prototype.ngOnInit = function () {
         this.setupViewer();
@@ -289,7 +284,6 @@ var PdfViewerComponent = (function () {
         'afterLoadComplete': [{ type: core_1.Output, args: ['after-load-complete',] },],
         'onError': [{ type: core_1.Output, args: ['error',] },],
         'onProgress': [{ type: core_1.Output, args: ['on-progress',] },],
-        'pdfJsWorkerSrc': [{ type: core_1.Input, args: ['pdfjs-worker-src',] },],
         'src': [{ type: core_1.Input },],
         'page': [{ type: core_1.Input, args: ['page',] },],
         'pageChange': [{ type: core_1.Output },],

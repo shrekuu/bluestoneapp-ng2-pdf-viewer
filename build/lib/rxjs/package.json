@@ -1,8 +1,8 @@
 {
   "_from": "rxjs@^5.3.0",
-  "_id": "rxjs@5.5.0",
+  "_id": "rxjs@5.5.2",
   "_inBundle": false,
-  "_integrity": "sha1-Jtjzhm63AOJH4HKKFHw9YomT2BI=",
+  "_integrity": "sha1-KNQD8AcRIZZ/GK1mVWMlXVQjasM=",
   "_location": "/rxjs",
   "_phantomChildren": {},
   "_requested": {
@@ -18,10 +18,10 @@
   "_requiredBy": [
     "#DEV:/"
   ],
-  "_resolved": "http://registry.npm.taobao.org/rxjs/download/rxjs-5.5.0.tgz",
-  "_shasum": "26d8f3866eb700e247e0728a147c3d628993d812",
+  "_resolved": "http://registry.npm.taobao.org/rxjs/download/rxjs-5.5.2.tgz",
+  "_shasum": "28d403f0071121967f18ad665563255d54236ac3",
   "_spec": "rxjs@^5.3.0",
-  "_where": "/Users/bond/AngularProjects/ng2-pdf-viewer",
+  "_where": "/Users/bond/AngularProjects/bluestoneapp-ng2-pdf-viewer",
   "author": {
     "name": "Ben Lesh",
     "email": "ben@benlesh.com"
@@ -127,7 +127,6 @@
   "engines": {
     "npm": ">=2.0.0"
   },
-  "es2015": "./_esm2015/Rx.js",
   "homepage": "https://github.com/ReactiveX/RxJS",
   "keywords": [
     "Rx",
@@ -153,7 +152,6 @@
     ]
   },
   "main": "./Rx.js",
-  "module": "./_esm5/Rx.js",
   "name": "rxjs",
   "repository": {
     "type": "git",
@@ -196,5 +194,5 @@
     "watch": "Watch codebase, trigger compile when source code changes"
   },
   "typings": "./Rx.d.ts",
-  "version": "5.5.0"
+  "version": "5.5.2"
 }

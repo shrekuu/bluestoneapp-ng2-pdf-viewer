@@ -297,14 +297,8 @@ export class PdfViewerComponent implements OnChanges, OnInit {
   @Output('error') onError = new EventEmitter<any>();
   @Output('on-progress') onProgress = new EventEmitter<PDFProgressData>();
 
-  @Input('pdfjs-worker-src') pdfJsWorkerSrc: string;
-
   constructor(private element: ElementRef) {
-    if (this.pdfJsWorkerSrc) {
-      PDFJS.workerSrc = this.pdfJsWorkerSrc;
-    } else {
-      PDFJS.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${ (PDFJS as any).version }/pdf.worker.min.js`;
-    }
+    PDFJS.workerSrc = "https://cdn.bootcss.com/pdf.js/1.9.640/pdf.worker.min.js";
   }
 
   ngOnInit() {

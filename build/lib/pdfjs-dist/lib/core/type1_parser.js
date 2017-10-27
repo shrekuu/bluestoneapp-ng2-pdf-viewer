@@ -110,10 +110,6 @@ var Type1CharString = function Type1CharStringClosure() {
                 break;
               }
               subrNumber = this.stack.pop();
-              if (!subrs[subrNumber]) {
-                error = true;
-                break;
-              }
               error = this.convert(subrs[subrNumber], subrs, seacAnalysisEnabled);
               break;
             case 11:
@@ -392,12 +388,6 @@ var Type1Parser = function Type1ParserClosure() {
       } while (ch >= 0 && !(0, _util.isSpace)(ch) && !isSpecial(ch));
       return token;
     },
-    readCharStrings: function Type1Parser_readCharStrings(bytes, lenIV) {
-      if (lenIV === -1) {
-        return bytes;
-      }
-      return decrypt(bytes, CHAR_STRS_ENCRYPT_KEY, lenIV);
-    },
     extractFontProgram: function Type1Parser_extractFontProgram() {
       var stream = this.stream;
       var subrs = [],
@@ -434,7 +424,7 @@ var Type1Parser = function Type1ParserClosure() {
               this.getToken();
               data = stream.makeSubStream(stream.pos, length);
               lenIV = program.properties.privateData['lenIV'];
-              encoded = this.readCharStrings(data.getBytes(), lenIV);
+              encoded = decrypt(data.getBytes(), CHAR_STRS_ENCRYPT_KEY, lenIV);
               stream.skip(length);
               this.nextChar();
               token = this.getToken();
@@ -456,7 +446,7 @@ var Type1Parser = function Type1ParserClosure() {
               this.getToken();
               data = stream.makeSubStream(stream.pos, length);
               lenIV = program.properties.privateData['lenIV'];
-              encoded = this.readCharStrings(data.getBytes(), lenIV);
+              encoded = decrypt(data.getBytes(), CHAR_STRS_ENCRYPT_KEY, lenIV);
               stream.skip(length);
               this.nextChar();
               token = this.getToken();

@@ -22,7 +22,7 @@
   "_resolved": "http://registry.npm.taobao.org/@angular/common/download/@angular/common-4.4.6.tgz",
   "_shasum": "4b81420724e0828a0e839b95a55eb1a7e83918f2",
   "_spec": "@angular/common@^4.1.0",
-  "_where": "/Users/bond/AngularProjects/ng2-pdf-viewer",
+  "_where": "/Users/bond/AngularProjects/bluestoneapp-ng2-pdf-viewer",
   "author": {
     "name": "angular"
   },

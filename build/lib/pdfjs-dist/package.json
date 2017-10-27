@@ -1,27 +1,27 @@
 {
-  "_from": "pdfjs-dist@^1.9.607",
-  "_id": "pdfjs-dist@1.9.648",
+  "_from": "pdfjs-dist@1.9.640",
+  "_id": "pdfjs-dist@1.9.640",
   "_inBundle": false,
-  "_integrity": "sha1-XPGrDs0kxJHHuQQVAEOIkY9esyo=",
+  "_integrity": "sha1-8EOFg2R9d2nGGXHE+cfi+m4Qdjo=",
   "_location": "/pdfjs-dist",
   "_phantomChildren": {},
   "_requested": {
-    "type": "range",
+    "type": "version",
     "registry": true,
-    "raw": "pdfjs-dist@^1.9.607",
+    "raw": "pdfjs-dist@1.9.640",
     "name": "pdfjs-dist",
     "escapedName": "pdfjs-dist",
-    "rawSpec": "^1.9.607",
+    "rawSpec": "1.9.640",
     "saveSpec": null,
-    "fetchSpec": "^1.9.607"
+    "fetchSpec": "1.9.640"
   },
   "_requiredBy": [
     "/"
   ],
-  "_resolved": "http://registry.npm.taobao.org/pdfjs-dist/download/pdfjs-dist-1.9.648.tgz",
-  "_shasum": "5cf1ab0ecd24c491c7b90415004388918f5eb32a",
-  "_spec": "pdfjs-dist@^1.9.607",
-  "_where": "/Users/bond/AngularProjects/ng2-pdf-viewer",
+  "_resolved": "http://registry.npm.taobao.org/pdfjs-dist/download/pdfjs-dist-1.9.640.tgz",
+  "_shasum": "f0438583647d7769c61971c4f9c7e2fa6e10763a",
+  "_spec": "pdfjs-dist@1.9.640",
+  "_where": "/Users/bond/AngularProjects/bluestoneapp-ng2-pdf-viewer",
   "browser": {
     "fs": false,
     "http": false,
@@ -52,5 +52,5 @@
     "type": "git",
     "url": "git+https://github.com/mozilla/pdfjs-dist.git"
   },
-  "version": "1.9.648"
+  "version": "1.9.640"
 }
