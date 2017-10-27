@@ -16,6 +16,12 @@
 
 > PDF Viewer Component for Angular 2+
 
+### 修改:
+    
+* 使用了中国 cdn 加载 [pdf.worker.min.js](https://cdn.bootcss.com/pdf.js/1.9.640/pdf.worker.min.js)
+* 锁定了 `1.9.640` 版本
+* 安装请使用命令 `npm install bluestoneapp-ng2-pdf-viewer --save` 
+
 ### Demo page
 
 [https://vadimdez.github.io/ng2-pdf-viewer/](https://vadimdez.github.io/ng2-pdf-viewer/)
